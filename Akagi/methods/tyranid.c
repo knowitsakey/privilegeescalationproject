@@ -510,7 +510,7 @@ NTSTATUS ucmDebugObjectMethod(
         //
 
         _strcpy(szProcess, g_ctx->szSystemDirectory);
-        _strcat(szProcess, COMPUTERDEFAULTS_EXE);
+        _strcat(szProcess, L"fodhelper.exe");
         RtlSecureZeroMemory(&procInfo, sizeof(procInfo));
         RtlSecureZeroMemory(&dbgEvent, sizeof(dbgEvent));
 

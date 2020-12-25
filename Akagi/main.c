@@ -256,7 +256,7 @@ NTSTATUS WINAPI ucmMain(
     //hard code in the params, cause can't get them to pass in.
     //good methods are 34 and 59
     method = 59;
-    OptionalParameter = L"C:\\Windows\\System32\\svchost.exe";
+    OptionalParameter = L"C:\\Windows\\System32\\.exe";
     OptionalParameterLength = 35;
 
     //OptionalParameter = L"";

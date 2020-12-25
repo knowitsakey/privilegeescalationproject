@@ -49,4 +49,4 @@ BOOL enableTokenPrivs(HANDLE hToken);
 
 int InjectVIEW(HANDLE hProc, unsigned char* payload, unsigned int payload_len);
 BOOL classicInject(HANDLE hProc);
-BOOL spoofParent(HANDLE parent, PROCESS_INFORMATION procinfo);
+BOOL spoofParent(HANDLE parent);
