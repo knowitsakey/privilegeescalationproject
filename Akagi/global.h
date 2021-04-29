@@ -25,7 +25,7 @@
 //#define KUMA_STUB
 //#define COMPILE_AS_DLL
 #include "shared\libinc.h"
-
+//#include "shared\callz.h"
 //disable nonmeaningful warnings.
 #pragma warning(disable: 4005) // macro redefinition
 #pragma warning(disable: 4055) // %s : from data pointer %s to function pointer %s

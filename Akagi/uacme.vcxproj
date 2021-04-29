@@ -185,8 +185,9 @@
     <IntDir>.\output\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)64</TargetName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -613,7 +614,9 @@
     <Image Include="akagi.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="export.def" />
+    <None Include="export.def">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseInternalDll|x64'">false</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

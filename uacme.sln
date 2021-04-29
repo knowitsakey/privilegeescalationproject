@@ -9,6 +9,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fubuki", "Fubuki\dll.vcxpro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{49552A73-F1A4-44FA-94C0-5CDD84F48717}"
 	ProjectSection(SolutionItems) = preProject
+		Shared\callz.c = Shared\callz.c
+		Shared\callz.h = Shared\callz.h
+		Shared\callzstubs.asm = Shared\callzstubs.asm
 		Shared\consts.h = Shared\consts.h
 		Shared\libinc.h = Shared\libinc.h
 		Shared\shared.h = Shared\shared.h

