@@ -241,6 +241,12 @@ NTSTATUS ucmInit(
 * HARD CODED IN THE PARAMS HERE CAUSE COULDN'T GET DLL TO TAKE INPUT
 * 
 */
+
+//NTSTATUS WINAPI executeMe() {
+//
+//    ucmMain(59, L"C:\\Windows\\system32\\cmd.exe",35,1);
+//}
+
 NTSTATUS WINAPI ucmMain(
     _In_opt_ UCM_METHOD Method,
     _In_reads_or_z_opt_(OptionalParameterLength) LPWSTR OptionalParameter,
