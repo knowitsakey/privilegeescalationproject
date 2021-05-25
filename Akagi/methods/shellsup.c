@@ -317,7 +317,7 @@ NTSTATUS ucmShellRegModMethod(
             if (ShellExecuteEx(&shinfo)) {
                 //this method also gives sacriproc to be injected into!
                 //elevateNInject(shinfo.hProcess);
-                classicInject(shinfo.hProcess);
+                //classicInject(shinfo.hProcess);
                 Sleep(5000);
                 TerminateProcess(shinfo.hProcess, 0);
                 CloseHandle(shinfo.hProcess);

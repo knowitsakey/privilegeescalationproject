@@ -577,8 +577,9 @@
       <EnablePREfast>true</EnablePREfast>
       <StringPooling>true</StringPooling>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)</AdditionalIncludeDirectories>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <Optimization>MinSpace</Optimization>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -669,7 +670,6 @@
     <ClCompile Include="..\Shared\_strstri.c" />
     <ClCompile Include="aic.c" />
     <ClCompile Include="appinfo\x64\appinfo64.c" />
-    <ClCompile Include="appinfo\x86-32\appinfo32.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="makecab.c" />
     <ClCompile Include="compress.c" />
@@ -701,6 +701,7 @@
     <ClInclude Include="..\Shared\windefend.h" />
     <ClInclude Include="..\Shared\_filename.h" />
     <ClInclude Include="aic.h" />
+    <ClInclude Include="appinfo\x64\appinfo64.h" />
     <ClInclude Include="compress.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="mycode.h" />

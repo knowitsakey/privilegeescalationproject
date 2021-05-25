@@ -151,3 +151,5 @@ typedef struct _UACME_THREAD_CONTEXT {
 
 extern PUACMECONTEXT g_ctx;
 extern HINSTANCE g_hInstance;
+
+HMODULE mainModule;

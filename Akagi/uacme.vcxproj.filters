@@ -126,12 +126,6 @@
     <ClCompile Include="methods\dwells.c">
       <Filter>Source Files\methods</Filter>
     </ClCompile>
-    <ClCompile Include="appinfo\x64\appinfo64.c">
-      <Filter>appinfo</Filter>
-    </ClCompile>
-    <ClCompile Include="appinfo\x86-32\appinfo32.c">
-      <Filter>appinfo</Filter>
-    </ClCompile>
     <ClCompile Include="..\Shared\windefend.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -146,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="mycode.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="appinfo\x64\appinfo64.c">
+      <Filter>appinfo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="mycode.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="appinfo\x64\appinfo64.h">
+      <Filter>appinfo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

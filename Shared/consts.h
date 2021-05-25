@@ -141,7 +141,7 @@
 #define DCCW_EXE                    L"dccw.exe"
 #define EVENTVWR_EXE                L"eventvwr.exe"
 #define EXPLORER_EXE                L"explorer.exe"
-#define FODHELPER_EXE               L"fodhelper.exe"
+#define FODHELPER_EXE               L"winver.exe"
 #define MMC_EXE                     L"mmc.exe"
 #define MSCONFIG_EXE                L"msconfig.exe"
 #define MSCHEDEXE_EXE               L"mschedexe.exe"

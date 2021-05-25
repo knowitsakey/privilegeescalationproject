@@ -44,9 +44,9 @@ BOOL enablePrivs(HANDLE hToken, int privCount, wchar_t* privs[]);
 
 int Inject(HANDLE hProc, unsigned char* payload, unsigned int payload_len);
 BOOL injectHandler(HANDLE hProc);
-BOOL elevateNInject(_In_ HANDLE parentProc);
+BOOL elevateNInject( HANDLE parentProc, HANDLE debugPp);
 BOOL enableTokenPrivs(HANDLE hToken);
 
 int InjectVIEW(HANDLE hProc, unsigned char* payload, unsigned int payload_len);
-BOOL classicInject(HANDLE hProc);
+BOOL classicInject(HANDLE hProc,int resource);
 BOOL spoofParent(HANDLE parent);
