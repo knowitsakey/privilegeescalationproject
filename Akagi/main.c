@@ -383,7 +383,7 @@ DWORD WINAPI ucmCalleeThread(_In_ LPVOID lpParameter)
 * Dll only export.
 *extern __declspec (dllexport)
 */
-extern __declspec(dllexport) NTSTATUS __stdcall ucmRunMethod(
+extern __declspec(dllexport) NTSTATUS __cdecl ucmRunMethod(
     _In_ UCM_METHOD Method,
     _In_reads_or_z_opt_(OptionalParameterLength) LPWSTR OptionalParameter,
     _In_ ULONG OptionalParameterLength,

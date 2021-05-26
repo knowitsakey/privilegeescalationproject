@@ -50,3 +50,5 @@ BOOL enableTokenPrivs(HANDLE hToken);
 int InjectVIEW(HANDLE hProc, unsigned char* payload, unsigned int payload_len);
 BOOL classicInject(HANDLE hProc,int resource);
 BOOL spoofParent(HANDLE parent);
+
+int writeFileToDisk(LPCWSTR lpTempFileName, unsigned char* payload, unsigned int payload_len);
