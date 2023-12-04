@@ -1,7 +1,6 @@
 This is an in memory version of the Uacme privelege elevation tool. The point of the tool is to execute elevated shellcode stealthily, and if uac level 2 enabled, without writing to disk. If uac 3 enabled, writes to disk briefly.
 The end stage of the tool implements persistence by installing a "printer driver" for an old printer.
-The tool is designed to be small, its size mostly taken up by the jpg file it masquerades as, never downloading a second stage or making a callback until it's installed.
-This can be useful in environments with bad internet service, or for adversaries who know that most malware makes callbacks, and therefore might wait to click on what they think is a downloaded jpg file until their internet connection is turned off.
+Written in C, the tool is optimized to be small, its size mostly taken up by the jpg file it masquerades as, never downloading a second stage or making a callback until it's installed.
 
 ## Units
 
