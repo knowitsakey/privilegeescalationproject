@@ -1,4 +1,4 @@
-This is an in memory version of the Uacme privelege elevation tool. The purpose of the tool is to execute elevated shellcode stealthily, in order to understand microsoft windows operating system security. If uac level 2 is enabled, shellcode is executed without writing to disk. If uac 3 is enabled, a dll is written to disk.
+This is an in memory version of the Uacme privelege elevation tool. The purpose of the tool is to execute shellcode with elevated privileges on microsoft windows, in order to understand microsoft windows operating system security. If uac level 2 is enabled, shellcode is executed without writing to disk. If uac 3 is enabled, a dll is written to disk.
 
 The end stage of the tool implements persistence by installing a phony printer driver for an older model of printer which does not have signatures for its executable code.
 
